@@ -1,0 +1,15 @@
+---
+Name: algolia-search
+After: 'framework/*','cms/*'
+---
+SiteConfig:
+  extensions:
+   - AlgoliaSearchSiteConfigExtension
+
+Page_Controller:
+  extensions:
+    - AlgoliaController
+
+Page:
+  extensions:
+    - PageExtension
