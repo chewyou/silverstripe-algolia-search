@@ -1,0 +1,11 @@
+{
+  "name": "chewyou/algolia-search",
+  "description": "Algolia Indexer and Search Functionality",
+  "type": "silverstripe-vendormodule",
+  "authors": [
+    {
+      "name": "Ben Pickett",
+      "email": "ben.pickett@education.govt.nz"
+    }
+  ]
+}
