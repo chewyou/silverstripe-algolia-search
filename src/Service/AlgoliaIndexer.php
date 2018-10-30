@@ -62,6 +62,6 @@ class AlgoliaIndexer
         $client = new \AlgoliaSearch\Client($this->applicationID, $this->apiKey);
         $searchIndex = $client->initIndex($this->indexName);
 
-        $searchIndex->deleteObject($item->ID. "_" . $item->ClassName);
+        $searchIndex->deleteObject(md5($item->ID. "_" . $item->ClassName));
     }
 }
