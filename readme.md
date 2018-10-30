@@ -25,7 +25,7 @@ Under Settings > Algolia Search Configuration, enter your Algolia account detail
     
 ## Theme Setup    
 
-Copy the directory */algolia-search* to your theme */src/js/components* directory
+Copy the directory */algolia-search* to your theme */src/js/components* directory. Line 32 of AlgoliaController.php looks for this file.
 
 Refer to */theme/src/js/main.js* for inspiration (ES6 is used)
 
@@ -34,6 +34,7 @@ Note the *search-config.js* (especially) and *search-algolia.js* files shouldn't
 *search-action.js* however should be adjusted based on the values indexed and result layout 
 
 
+*Could have a text field in the CMS settings to let developers input the location of the search-config.js file*
 
 
 
@@ -61,14 +62,18 @@ This is a guide to go with the JS and should also be overridden with your own im
      
      
      
-## Indexing existing pages
+## Indexing existing pages (two options)
 
+##### Option 1: 
 Run the dev task *Algolia: Index Page by Type* where:
+
 
 - PageType is the classname of the page
 - Values are comma separated, no spaces, case sensitive and are $db values (ie. &values=Title,Content,LastEdited)
 
 
+##### Option 2: 
+Or go through and save/publish all of the pages to index
     /dev/tasks/AlgoliaIndexPageByType&pagetype={PageType}&values={Title,Content,LastEdited}
 
 

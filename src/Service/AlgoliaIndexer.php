@@ -34,7 +34,7 @@ class AlgoliaIndexer
         $searchIndex = $client->initIndex($this->indexName);
 
         // Index Unique Identifier
-        $toIndex = ['objectID' => $item->ID. "_" . $item->ClassName];
+        $toIndex = ['objectID' => md5($item->ID. "_" . $item->ClassName)];
 
         // Index values entered in CMS
         foreach ($valuesToIndex as $value) {
@@ -50,9 +50,7 @@ class AlgoliaIndexer
         }
         $toIndex['objectTagNames'] = $tagNames;
 
-        // Index Parent Info
-        $toIndex['objectParentTitle'] = $item->Parent()->Title;
-        $toIndex['objectParentID'] = $item->Parent()->ID;
+        $toIndex['objectSearchable'] = $item->Searchable;
 
         $searchIndex->addObject($toIndex);
     }
