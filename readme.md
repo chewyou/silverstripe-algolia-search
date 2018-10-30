@@ -34,7 +34,7 @@ Note the *search-config.js* (especially) and *search-algolia.js* files shouldn't
 *search-action.js* however should be adjusted based on the values indexed and result layout 
 
 
-*Could have a text field in the CMS settings to let developers input the location of the search-config.js file*
+
 
 
 
@@ -77,3 +77,6 @@ Or go through and save/publish all of the pages to index
     /dev/tasks/AlgoliaIndexPageByType&pagetype={PageType}&values={Title,Content,LastEdited}
 
 
+
+### To Do
+*Could have a text field in the CMS settings to let developers input the location of the search-config.js file*
