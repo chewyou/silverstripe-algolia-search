@@ -21,6 +21,7 @@ class AlgoliaSearchSiteConfigExtension extends DataExtension
         'applicationID' => 'Varchar(50)',
         'indexName' => 'Varchar(100)',
         'indexValues' => 'Text',
+        'searchConfigLocation' => 'Varchar(255)'
     ];
 
     private static $has_many = [
@@ -45,6 +46,9 @@ class AlgoliaSearchSiteConfigExtension extends DataExtension
                 ),
                 Tab::create('Tags',
                     $gridField = GridField::create('TagNames', 'TagNames', $this->owner->TagNames())
+                ),
+                Tab::create('API Details',
+                    TextField::create('searchConfigLocation', 'Search Config JS File Location')
                 )
             )
         ]);

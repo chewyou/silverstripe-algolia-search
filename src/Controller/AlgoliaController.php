@@ -29,6 +29,6 @@ class AlgoliaController extends DataExtension
             ];
         }
 
-        Requirements::javascriptTemplate($theme.'/src/js/components/algolia-search/search-config.js', $js_config);
+        Requirements::javascriptTemplate($theme.$siteConfig->searchConfigLocation, $js_config);
     }
 }
