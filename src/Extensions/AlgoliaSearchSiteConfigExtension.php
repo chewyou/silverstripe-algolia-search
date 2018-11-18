@@ -49,7 +49,7 @@ class AlgoliaSearchSiteConfigExtension extends DataExtension
                 ),
                 Tab::create('JS File Config',
                     TextField::create('searchConfigLocation', 'Search Config JS File Location')
-                        ->Description('eg: /src/js/components/algolia-search/search-config.js')
+                        ->addDescription('eg: /src/js/components/algolia-search/search-config.js')
                 )
             )
         ]);
