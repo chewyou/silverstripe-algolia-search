@@ -29,6 +29,13 @@ class AlgoliaController extends DataExtension
             ];
         }
 
-        Requirements::javascriptTemplate($theme.$siteConfig->searchConfigLocation, $js_config);
+        try {
+            Requirements::javascriptTemplate($theme.$siteConfig->searchConfigLocation, $js_config);
+        } catch (\Exception $e) {
+            Debug::dump("There was an error \n" . $e);
+            Debug::dump('Theme directory set as: ' . $theme);
+            Debug::dump('search-config.js location set as: ' . $siteConfig->searchConfigLocation);
+        }
+
     }
 }
