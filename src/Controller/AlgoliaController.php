@@ -6,6 +6,7 @@ use SilverStripe\ORM\DataExtension;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\View\ThemeResourceLoader;
 use SilverStripe\View\Requirements;
+use SilverStripe\Dev\Debug;
 
 class AlgoliaController extends DataExtension
 {
@@ -13,7 +14,7 @@ class AlgoliaController extends DataExtension
     {
         $siteConfig = SiteConfig::current_site_config();
 
-        $theme = ThemeResourceLoader::inst()->getPath('simple');
+        $theme = ThemeResourceLoader::inst()->getPath('');
 
         if ($siteConfig->searchAPIKey && $siteConfig->applicationID && $siteConfig->indexName) {
             $js_config = [
@@ -30,11 +31,10 @@ class AlgoliaController extends DataExtension
         }
 
         try {
-            Requirements::javascriptTemplate($theme.$siteConfig->searchConfigLocation, $js_config);
+            Requirements::javascriptTemplate($siteConfig->searchConfigLocation, $js_config);
         } catch (\Exception $e) {
             Debug::dump("There was an error \n" . $e);
-            Debug::dump('Theme directory set as: ' . $theme);
-            Debug::dump('search-config.js location set as: ' . $siteConfig->searchConfigLocation);
+            Debug::dump('Theme directory set as: ' . $theme . '\n' . $siteConfig->searchConfigLocation);
         }
 
     }
