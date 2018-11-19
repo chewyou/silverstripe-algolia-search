@@ -52,6 +52,8 @@ class AlgoliaIndexer
 
         $toIndex['objectSearchable'] = $item->Searchable;
 
+        $toIndex['objectURL'] = $item->AbsoluteLink();
+
         $searchIndex->addObject($toIndex);
     }
 
