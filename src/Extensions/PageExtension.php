@@ -17,7 +17,7 @@ class PageExtension extends DataExtension
     private static $enable_indexer = true;
 
     private static $db = [
-        'Searchable' => 'Boolean'
+        'Searchable' => 'Boolean(1)'
     ];
 
     private static $many_many = [
