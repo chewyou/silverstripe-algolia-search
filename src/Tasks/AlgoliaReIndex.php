@@ -9,10 +9,11 @@ use SilverStripe\Core\Config\Config;
 use Symbiote\QueuedJobs\Services\AbstractQueuedJob;
 use Symbiote\QueuedJobs\Services\QueuedJob;
 use Symbiote\QueuedJobs\Services\QueuedJobService;
-use SilverStripe\Dev\Debug;
 use SilverStripe\CMS\Model\SiteTree;
 use DNADesign\Elemental\Models\BaseElement;
-
+use Silverstripe\Versioned\Versioned;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Dev\Debug;
 
 if (!class_exists(AbstractQueuedJob::class)) {
     return;
@@ -43,7 +44,7 @@ class AlgoliaReIndex extends AbstractQueuedJob implements QueuedJob
         $indexValues = str_replace(' ', '', $siteConfig->indexValues);
         $valuesToIndex = explode(',', $indexValues);
 
-        $pages = SiteTree::get();
+        $pages = Versioned::get_by_stage(SiteTree::class, 'Live');
 
         foreach ($pages as $page) {
 

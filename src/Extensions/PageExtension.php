@@ -51,7 +51,7 @@ class PageExtension extends DataExtension
         }
     }
 
-    public function onAfterWrite()
+    public function onAfterPublish()
     {
         if ($this->owner->enable_indexer()) {
 
@@ -76,7 +76,6 @@ class PageExtension extends DataExtension
                         array_push($blockArray, $blockItem);
                     }
                     // --------
-
                 }
 
                 $indexer = new AlgoliaIndexer($this->owner, $valuesToIndex, $blockArray);
