@@ -64,12 +64,19 @@ class PageExtension extends DataExtension
 
                 $blockArray = [];
                 if ($this->owner->IndexContentBlocks == 1) {
+
+                    // if blocks exist ; do below ; else do nothing
+
                     $blocks = $this->owner->ElementalArea()->Elements();
                     foreach ($blocks as $block) {
                         $blockItem['Title'] = $block->Title;
-                        $blockItem['Content'] = $block->Content;
+                        // Strip HTML
+                        $refinedContent = str_replace("\n", " ", strip_tags($block->Content));
+                        $blockItem['Content'] = $refinedContent;
                         array_push($blockArray, $blockItem);
                     }
+                    // --------
+
                 }
 
                 $indexer = new AlgoliaIndexer($this->owner, $valuesToIndex, $blockArray);
