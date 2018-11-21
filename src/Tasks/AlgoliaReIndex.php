@@ -55,7 +55,7 @@ class AlgoliaReIndex extends AbstractQueuedJob implements QueuedJob
                 array_push($blockArray, $blockItem);
             }
 
-            $indexer = new AlgoliaIndexer($page, $valuesToIndex, $page->IndexContentBlocks, $blockArray);
+            $indexer = new AlgoliaIndexer($page, $valuesToIndex, $blockArray);
             $indexer->indexData();
         }
 
