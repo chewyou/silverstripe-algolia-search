@@ -11,13 +11,15 @@ use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\CheckboxSetField;
 use Chewyou\Algolia\DataObject\TagName;
+use SilverStripe\Dev\Debug;
 
 class PageExtension extends DataExtension
 {
     private static $enable_indexer = true;
 
     private static $db = [
-        'Searchable' => 'Boolean(1)'
+        'Searchable' => 'Boolean(1)',
+        'IndexContentBlocks' => 'Boolean(1)'
     ];
 
     private static $many_many = [
@@ -36,6 +38,8 @@ class PageExtension extends DataExtension
                 TabSet::create('Search Settings',
                     Tab::create('Options',
                         OptionsetField::create('Searchable', 'Show in Search?')
+                            ->setSource([true => 'Yes', false => 'No']),
+                        OptionsetField::create('IndexContentBlocks', 'Index Content Blocks?')
                             ->setSource([true => 'Yes', false => 'No']),
                         LiteralField::create('LastUpdated', 'Last indexed: ' . $this->owner->LastEdited . '')
                     ),
@@ -58,10 +62,20 @@ class PageExtension extends DataExtension
                 $indexValues = str_replace(' ', '', $siteConfig->indexValues);
                 $valuesToIndex = explode(',', $indexValues);
 
-                $indexer = new AlgoliaIndexer($this->owner, $valuesToIndex);
+                $blockArray = [];
+                if ($this->owner->IndexContentBlocks == 1) {
+                    $blocks = $this->owner->ElementalArea()->Elements();
+                    foreach ($blocks as $block) {
+                        $blockItem['Title'] = $block->Title;
+                        $blockItem['Content'] = $block->Content;
+                        array_push($blockArray, $blockItem);
+                    }
+                }
+
+                $indexer = new AlgoliaIndexer($this->owner, $valuesToIndex, $blockArray);
                 $indexer->indexData();
             } else {
-                $indexer = new AlgoliaIndexer($this->owner, null);
+                $indexer = new AlgoliaIndexer($this->owner, null, null);
                 $indexer->deleteData();
             }
 
@@ -73,7 +87,7 @@ class PageExtension extends DataExtension
     public function onBeforeDelete()
     {
         if ($this->owner->enable_indexer()) {
-            $indexer = new AlgoliaIndexer($this->owner, null);
+            $indexer = new AlgoliaIndexer($this->owner, null, null);
             $indexer->deleteData();
         }
 

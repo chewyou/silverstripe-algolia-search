@@ -3,6 +3,7 @@
 namespace Chewyou\Algolia\Service;
 
 use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Dev\Debug;
 
 require_once(__DIR__ . '/../vendor/algoliasearch-client-php-master/algoliasearch.php');
 
@@ -13,8 +14,9 @@ class AlgoliaIndexer
     private $applicationID;
     private $indexName;
     private $valuesToIndex;
+    private $blockArray;
 
-    public function __construct($item, $valuesToIndex)
+    public function __construct($item, $valuesToIndex, $blockArray)
     {
         $siteConfig = SiteConfig::current_site_config();
 
@@ -23,12 +25,14 @@ class AlgoliaIndexer
         $this->applicationID = $siteConfig->applicationID;
         $this->indexName = $siteConfig->indexName;
         $this->valuesToIndex = $valuesToIndex;
+        $this->blockArray = $blockArray;
     }
 
     public function indexData()
     {
         $item = $this->item;
         $valuesToIndex = $this->valuesToIndex;
+        $blockArray = $this->blockArray;
 
         $client = new \AlgoliaSearch\Client($this->applicationID, $this->apiKey);
         $searchIndex = $client->initIndex($this->indexName);
@@ -48,11 +52,12 @@ class AlgoliaIndexer
         foreach ($item->TagNames() as $tagName) {
             array_push($tagNames, $tagName->Title);
         }
+
         $toIndex['objectTagNames'] = $tagNames;
-
         $toIndex['objectSearchable'] = $item->Searchable;
-
         $toIndex['objectURL'] = $item->AbsoluteLink();
+
+        $toIndex['objectContentBlocks'] = $blockArray;
 
         $searchIndex->addObject($toIndex);
     }

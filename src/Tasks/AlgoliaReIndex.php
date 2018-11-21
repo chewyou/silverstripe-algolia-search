@@ -11,6 +11,8 @@ use Symbiote\QueuedJobs\Services\QueuedJob;
 use Symbiote\QueuedJobs\Services\QueuedJobService;
 use SilverStripe\Dev\Debug;
 use SilverStripe\CMS\Model\SiteTree;
+use DNADesign\Elemental\Models\BaseElement;
+
 
 if (!class_exists(AbstractQueuedJob::class)) {
     return;
@@ -44,7 +46,16 @@ class AlgoliaReIndex extends AbstractQueuedJob implements QueuedJob
         $pages = SiteTree::get();
 
         foreach ($pages as $page) {
-            $indexer = new AlgoliaIndexer($page, $valuesToIndex);
+
+            $blocks = $page->ElementalArea()->Elements();
+            $blockArray = [];
+            foreach ($blocks as $block) {
+                $blockItem['Title'] = $block->Title;
+                $blockItem['Content'] = $block->Content;
+                array_push($blockArray, $blockItem);
+            }
+
+            $indexer = new AlgoliaIndexer($page, $valuesToIndex, $page->IndexContentBlocks, $blockArray);
             $indexer->indexData();
         }
 
