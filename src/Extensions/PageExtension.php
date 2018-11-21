@@ -51,14 +51,20 @@ class PageExtension extends DataExtension
     {
         if ($this->owner->enable_indexer()) {
 
-            $siteConfig = SiteConfig::current_site_config();
+            if ($this->owner->Searchable == 1) {
+                $siteConfig = SiteConfig::current_site_config();
 
-            // Should be adjusted based on what needs to be indexed in the siteconfig
-            $indexValues = str_replace(' ', '', $siteConfig->indexValues);
-            $valuesToIndex = explode(',', $indexValues);
+                // Should be adjusted based on what needs to be indexed in the siteconfig
+                $indexValues = str_replace(' ', '', $siteConfig->indexValues);
+                $valuesToIndex = explode(',', $indexValues);
 
-            $indexer = new AlgoliaIndexer($this->owner, $valuesToIndex);
-            $indexer->indexData();
+                $indexer = new AlgoliaIndexer($this->owner, $valuesToIndex);
+                $indexer->indexData();
+            } else {
+                $indexer = new AlgoliaIndexer($this->owner, null);
+                $indexer->deleteData();
+            }
+
         }
 
         parent::onAfterWrite();
