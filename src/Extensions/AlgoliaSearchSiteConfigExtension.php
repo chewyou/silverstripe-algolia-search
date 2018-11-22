@@ -9,6 +9,7 @@ use SilverStripe\Forms\TextAreaField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\TabSet;
+use SilverStripe\Forms\OptionsetField;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use Chewyou\Algolia\DataObject\TagName;
@@ -21,7 +22,8 @@ class AlgoliaSearchSiteConfigExtension extends DataExtension
         'applicationID' => 'Varchar(50)',
         'indexName' => 'Varchar(100)',
         'indexValues' => 'Text',
-        'searchConfigLocation' => 'Varchar(255)'
+        'searchConfigLocation' => 'Varchar(255)',
+        'usingBlocks' => 'Boolean(0)'
     ];
 
     private static $has_many = [
@@ -47,9 +49,11 @@ class AlgoliaSearchSiteConfigExtension extends DataExtension
                 Tab::create('Tags',
                     $gridField = GridField::create('TagNames', 'TagNames', $this->owner->TagNames())
                 ),
-                Tab::create('JS File Config',
+                Tab::create('Configuration',
                     TextField::create('searchConfigLocation', 'Search Config JS File Location')
-                        ->setDescription('eg: /src/js/components/algolia-search/search-config.js')
+                        ->setDescription('eg: /src/js/components/algolia-search/search-config.js'),
+                    OptionsetField::create('usingBlocks', 'Is this project Elemental Blocks?')
+                        ->setSource([true => 'Yes', false => 'No'])
                 )
             )
         ]);
