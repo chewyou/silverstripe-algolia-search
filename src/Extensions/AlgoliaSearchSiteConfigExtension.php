@@ -52,7 +52,7 @@ class AlgoliaSearchSiteConfigExtension extends DataExtension
                 Tab::create('Configuration',
                     TextField::create('searchConfigLocation', 'Search Config JS File Location')
                         ->setDescription('eg: /src/js/components/algolia-search/search-config.js'),
-                    OptionsetField::create('usingBlocks', 'Is this project Elemental Blocks?')
+                    OptionsetField::create('usingBlocks', 'Is this project using Elemental Blocks?')
                         ->setSource([true => 'Yes', false => 'No'])
                 )
             )
