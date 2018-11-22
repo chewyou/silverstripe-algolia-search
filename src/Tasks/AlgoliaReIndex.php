@@ -48,17 +48,17 @@ class AlgoliaReIndex extends AbstractQueuedJob implements QueuedJob
 
         foreach ($pages as $page) {
 
-            // if blocks exist ; do below ; else do nothing
-            $blocks = $page->ElementalArea()->Elements();
             $blockArray = [];
-            foreach ($blocks as $block) {
-                $blockItem['Title'] = $block->Title;
-                // Strip HTML
-                $refinedContent = str_replace("\n", " ", strip_tags($block->Content));
-                $blockItem['Content'] = $refinedContent;
-                array_push($blockArray, $blockItem);
+            $blocks = $page->ElementalArea()->Elements();
+            if (($blocks && $blocks->exists())) {
+                foreach ($blocks as $block) {
+                    $blockItem['Title'] = $block->Title;
+                    // Strip HTML
+                    $refinedContent = str_replace("\n", " ", strip_tags($block->Content));
+                    $blockItem['Content'] = $refinedContent;
+                    array_push($blockArray, $blockItem);
+                }
             }
-            // --------
 
             $indexer = new AlgoliaIndexer($page, $valuesToIndex, $blockArray);
             $indexer->indexData();
