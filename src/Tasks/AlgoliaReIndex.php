@@ -54,8 +54,9 @@ class AlgoliaReIndex extends AbstractQueuedJob implements QueuedJob
                 foreach ($blocks as $block) {
                     $blockItem['Title'] = $block->Title;
                     // Strip HTML
-                    $refinedContent = str_replace("\n", " ", strip_tags($block->Content));
-                    $blockItem['Content'] = $refinedContent;
+                    $stripHTML = str_replace("\n", " ", strip_tags($block->Content));
+                    $stripComponents = preg_replace('/[\[].*[\]]/U' , '', $stripHTML);
+                    $blockItem['Content'] = $stripComponents;
                     array_push($blockArray, $blockItem);
                 }
             }
