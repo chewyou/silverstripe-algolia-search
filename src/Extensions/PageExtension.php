@@ -51,7 +51,7 @@ class PageExtension extends DataExtension
         }
     }
 
-    public function onAfterPublish()
+    public function onAfterWrite()
     {
         if ($this->owner->enable_indexer()) {
 
