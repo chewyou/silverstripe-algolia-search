@@ -79,4 +79,4 @@ Or go through and save/publish all of the pages to index
 
 
 ### To Do
-*Could have a text field in the CMS settings to let developers input the location of the search-config.js file*
+*Using the option to use Elemental Blocks; show or hide PageExtension Index Blocks option, and index a page when a block is published/updated (BlockExtension)*

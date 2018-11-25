@@ -54,6 +54,7 @@ class AlgoliaSearchSiteConfigExtension extends DataExtension
                         ->setDescription('eg: /src/js/components/algolia-search/search-config.js'),
                     OptionsetField::create('usingBlocks', 'Is this project using Elemental Blocks?')
                         ->setSource([true => 'Yes', false => 'No'])
+                        ->setDescription('Part of the future endeavours. Does not do anything.... yet')
                 )
             )
         ]);
