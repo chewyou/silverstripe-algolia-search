@@ -10,10 +10,6 @@
     "lint-js": "node_modules/.bin/eslint src/js",
     "lint-sass": "node_modules/.bin/sass-lint -v"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://bitbucket.org/education_nz/algolia-search.git"
-  },
   "license": "BSD-3-Clause",
   "dependencies": {
     "bulma": "^0.5.0",

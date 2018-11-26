@@ -6,8 +6,6 @@ use SilverStripe\Dev\BuildTask;
 use SilverStripe\Dev\Debug;
 use SilverStripe\SiteConfig\SiteConfig;
 
-require_once(__DIR__ . '/../vendor/algoliasearch-client-php-master/algoliasearch.php');
-
 class AlgoliaIndexPageByType extends BuildTask
 {
     protected $title = 'Algolia: Index Page by Type';
@@ -17,7 +15,9 @@ class AlgoliaIndexPageByType extends BuildTask
     protected $enabled = true;
 
     private $apiKey;
+
     private $applicationID;
+
     private $indexName;
 
     public function run($request)
@@ -37,7 +37,7 @@ class AlgoliaIndexPageByType extends BuildTask
             $this->indexTypeOf($pagetype, $values);
 
         } else {
-            Debug::dump("In URL add: 
+            Debug::dump("In URL add:
             \n?pagetype={pagetype}&values={Title,Subtitle,Content}
             \nID is added automatically.
             \nValues are comma separated, no spaces.

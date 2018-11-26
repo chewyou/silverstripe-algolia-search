@@ -4,11 +4,9 @@ Name: algolia-search
 Silverstripe\SiteConfig\SiteConfig:
   extensions:
    - Chewyou\Algolia\Extensions\AlgoliaSearchSiteConfigExtension
-
 PageController:
   extensions:
     - Chewyou\Algolia\Controller\AlgoliaController
-
 Page:
   extensions:
-    - PageExtension
+    - Chewyou\Algolia\Extensions\PageExtension

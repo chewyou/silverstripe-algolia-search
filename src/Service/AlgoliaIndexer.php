@@ -5,18 +5,44 @@ namespace Chewyou\Algolia\Service;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Dev\Debug;
 
-require_once(__DIR__ . '/../vendor/algoliasearch-client-php-master/algoliasearch.php');
-
 class AlgoliaIndexer
 {
+    /**
+     * @var DataObject
+     */
     private $item;
+
+    /**
+     * @var string
+     */
     private $apiKey;
+
+    /**
+     * @var string
+     */
     private $applicationID;
+
+    /**
+     * @var string
+     */
     private $indexName;
+
+    /**
+     * @var array
+     */
     private $valuesToIndex;
+
+    /**
+     * @var array
+     */
     private $blockArray;
 
-    public function __construct($item, $valuesToIndex, $blockArray)
+    /**
+     * @param SilverStripe\ORM\DataObject $item
+     * @param string[] $valuesToIndex
+     * @param string[] $blocksArray
+     */
+    public function __construct($item, $valuesToIndex, $blockArray = [])
     {
         $siteConfig = SiteConfig::current_site_config();
 
@@ -28,8 +54,23 @@ class AlgoliaIndexer
         $this->blockArray = $blockArray;
     }
 
+    /**
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return ($this->applicationID && $this->apiKey);
+    }
+
+    /**
+     * @return boolean
+     */
     public function indexData()
     {
+        if (!$this->isEnabled()) {
+            return false;
+        }
+
         $item = $this->item;
         $valuesToIndex = $this->valuesToIndex;
         $blockArray = $this->blockArray;
@@ -60,15 +101,26 @@ class AlgoliaIndexer
         $toIndex['objectContentBlocks'] = $blockArray;
 
         $searchIndex->addObject($toIndex);
+
+        return true;
     }
 
+    /**
+     * @return boolean
+     */
     public function deleteData()
     {
+        if (!$this->isEnabled()) {
+            return false;
+        }
+
         $item = $this->item;
 
         $client = new \AlgoliaSearch\Client($this->applicationID, $this->apiKey);
         $searchIndex = $client->initIndex($this->indexName);
 
         $searchIndex->deleteObject(md5($item->ID. "_" . $item->ClassName));
+
+        return true;
     }
 }

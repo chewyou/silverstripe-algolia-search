@@ -1,5 +1,7 @@
 <?php
 
+namespace Chewyou\Algolia\Extensions;
+
 use Chewyou\Algolia\Service\AlgoliaIndexer;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\ORM\Map;
@@ -15,6 +17,11 @@ use SilverStripe\Dev\Debug;
 
 class PageExtension extends DataExtension
 {
+    /**
+     * @var boolean
+     *
+     * @config
+     */
     private static $enable_indexer = true;
 
     private static $db = [
@@ -34,8 +41,8 @@ class PageExtension extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         if ($this->owner->enable_indexer()) {
-            $fields->addFieldsToTab('Root.Search Settings', [
-                TabSet::create('Search Settings',
+            $fields->addFieldsToTab('Root.SearchSettings', [
+                TabSet::create('SearchSettings',
                     Tab::create('Options',
                         OptionsetField::create('Searchable', 'Show in Search?')
                             ->setSource([true => 'Yes', false => 'No']),
@@ -54,7 +61,6 @@ class PageExtension extends DataExtension
     public function onAfterWrite()
     {
         if ($this->owner->enable_indexer()) {
-
             if ($this->owner->Searchable == 1) {
                 $siteConfig = SiteConfig::current_site_config();
 

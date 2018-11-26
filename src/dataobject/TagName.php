@@ -20,9 +20,11 @@ class TagName extends DataObject
         'SiteConfig'   => SiteConfig::class
     ];
 
-    private static $belongs_many_many = array(
+    private static $belongs_many_many = [
         'Page' => Page::class
-    );
+    ];
+
+    private static $table_name = 'AlgoliaTagName';
 
     public function getCMSFields()
     {

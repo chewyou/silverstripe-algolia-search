@@ -31,11 +31,6 @@ class AlgoliaReIndex extends AbstractQueuedJob implements QueuedJob
         return QueuedJob::IMMEDIATE;
     }
 
-    public function setup()
-    {
-        parent::setup();
-    }
-
     public function process()
     {
         $siteConfig = SiteConfig::current_site_config();
@@ -47,9 +42,9 @@ class AlgoliaReIndex extends AbstractQueuedJob implements QueuedJob
         $pages = Versioned::get_by_stage(SiteTree::class, 'Live');
 
         foreach ($pages as $page) {
-
             $blockArray = [];
             $blocks = $page->ElementalArea()->Elements();
+
             if (($blocks && $blocks->exists())) {
                 foreach ($blocks as $block) {
                     $blockItem['Title'] = $block->Title;

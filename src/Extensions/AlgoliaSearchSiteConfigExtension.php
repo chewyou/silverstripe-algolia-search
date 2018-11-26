@@ -32,10 +32,9 @@ class AlgoliaSearchSiteConfigExtension extends DataExtension
 
     public function updateCMSFields(FieldList $fields)
     {
-
         $config = GridFieldConfig_RelationEditor::create();
 
-        $fields->addFieldsToTab('Root.Algolia Search Configuration', [
+        $fields->addFieldsToTab('Root.AlgoliaSearchConfiguration', [
             TabSet::create('Algolia Search Configuration',
                 Tab::create('API Details',
                     TextField::create('adminAPIKey', 'Admin API Key'),
@@ -58,6 +57,7 @@ class AlgoliaSearchSiteConfigExtension extends DataExtension
                 )
             )
         ]);
+
         $gridField->setConfig($config);
     }
 }
