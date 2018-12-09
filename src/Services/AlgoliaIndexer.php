@@ -88,13 +88,17 @@ class AlgoliaIndexer
         $searchIndex = $client->initIndex($this->indexName);
 
         // Index Unique Identifier
-        $toIndex = ['objectID' => md5($item->ID. "_" . $item->ClassName)];
+        $toIndex = [
+            'objectID' => md5($item->ID. "_" . $item->ClassName)
+        ];
 
         // Index values entered in CMS
-        foreach ($valuesToIndex as $value) {
-            // Strip html
-            $refinedValue = str_replace("\n", " ", strip_tags($item->$value));
-            $toIndex['object'.$value] = $refinedValue;
+        if ($valuesToIndex) {
+            foreach ($valuesToIndex as $value) {
+                // Strip html
+                $refinedValue = str_replace("\n", " ", strip_tags($item->$value));
+                $toIndex['object'.$value] = $refinedValue;
+            }
         }
 
         // Index Tags
@@ -108,9 +112,9 @@ class AlgoliaIndexer
 
         $toIndex['objectTagNames'] = $tagNames;
         $toIndex['objectSearchable'] = $item->Searchable;
+        $toIndex['objectClassName'] = $item->ClassName;
         $toIndex['objectURL'] = $item->AbsoluteLink();
-
-        $toIndex['objectContentBlocks'] = $blockArray;
+        $toIndex['objctContentBlocks'] = $blockArray;
 
         $searchIndex->saveObject($toIndex);
 
