@@ -1,9 +1,10 @@
 <?php
 
-namespace Chewyou\Algolia\Service;
+namespace Chewyou\Algolia\Services;
 
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Dev\Debug;
+use Algolia\AlgoliaSearch\SearchClient;
 
 class AlgoliaIndexer
 {
@@ -42,7 +43,7 @@ class AlgoliaIndexer
      * @param string[] $valuesToIndex
      * @param string[] $blocksArray
      */
-    public function __construct($item, $valuesToIndex, $blockArray = [])
+    public function __construct($item = null, $valuesToIndex = [], $blockArray = [])
     {
         $siteConfig = SiteConfig::current_site_config();
 
@@ -63,6 +64,14 @@ class AlgoliaIndexer
     }
 
     /**
+     * @return SearchClient
+     */
+    public function getClient()
+    {
+        return SearchClient::create($this->applicationID, $this->apiKey);
+    }
+
+    /**
      * @return boolean
      */
     public function indexData()
@@ -75,7 +84,7 @@ class AlgoliaIndexer
         $valuesToIndex = $this->valuesToIndex;
         $blockArray = $this->blockArray;
 
-        $client = new \AlgoliaSearch\Client($this->applicationID, $this->apiKey);
+        $client = $this->getClient();
         $searchIndex = $client->initIndex($this->indexName);
 
         // Index Unique Identifier
@@ -90,8 +99,11 @@ class AlgoliaIndexer
 
         // Index Tags
         $tagNames = [];
-        foreach ($item->TagNames() as $tagName) {
-            array_push($tagNames, $tagName->Title);
+
+        if ($item->hasMethod('TagNames')) {
+            foreach ($item->TagNames() as $tagName) {
+                array_push($tagNames, $tagName->Title);
+            }
         }
 
         $toIndex['objectTagNames'] = $tagNames;
@@ -100,7 +112,7 @@ class AlgoliaIndexer
 
         $toIndex['objectContentBlocks'] = $blockArray;
 
-        $searchIndex->addObject($toIndex);
+        $searchIndex->saveObject($toIndex);
 
         return true;
     }

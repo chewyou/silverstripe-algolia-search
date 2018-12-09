@@ -12,7 +12,7 @@ use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\CheckboxSetField;
-use Chewyou\Algolia\DataObject\TagName;
+use Chewyou\Algolia\Model\TagName;
 use SilverStripe\Dev\Debug;
 
 class PageExtension extends DataExtension

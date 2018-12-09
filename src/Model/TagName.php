@@ -1,6 +1,6 @@
 <?php
 
-namespace Chewyou\Algolia\DataObject;
+namespace Chewyou\Algolia\Model;
 
 use SilverStripe\ORM\DataObject;
 use SilverStripe\SiteConfig\SiteConfig;

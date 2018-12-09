@@ -12,7 +12,7 @@ use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\OptionsetField;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
-use Chewyou\Algolia\DataObject\TagName;
+use Chewyou\Algolia\Model\TagName;
 
 class AlgoliaSearchSiteConfigExtension extends DataExtension
 {
