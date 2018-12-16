@@ -2,7 +2,7 @@
 
 namespace Chewyou\Algolia\Extensions;
 
-use Chewyou\Algolia\Service\AlgoliaIndexer;
+use Chewyou\Algolia\Services\AlgoliaIndexer;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\ORM\Map;
 use SilverStripe\Forms\FieldList;
