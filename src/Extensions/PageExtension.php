@@ -69,16 +69,19 @@ class PageExtension extends DataExtension
                 $valuesToIndex = explode(',', $indexValues);
 
                 $blockArray = [];
-                if ($this->owner->IndexContentBlocks == 1) {
-                    $blocks = $this->owner->ElementalArea()->Elements();
-                    if (($blocks && $blocks->exists())) {
-                        foreach ($blocks as $block) {
-                            $blockItem['Title'] = $block->Title;
-                            // Strip HTML
-                            $stripHTML = str_replace("\n", " ", strip_tags($block->Content));
-                            $stripComponents = preg_replace('/[\[].*[\]]/U' , '', $stripHTML);
-                            $blockItem['Content'] = $stripComponents;
-                            array_push($blockArray, $blockItem);
+
+                if ($this->owner->hasMethod('ElementalArea')) {
+                    if ($this->owner->IndexContentBlocks == 1) {
+                        $blocks = $this->owner->ElementalArea()->Elements();
+                        if (($blocks && $blocks->exists())) {
+                            foreach ($blocks as $block) {
+                                $blockItem['Title'] = $block->Title;
+                                // Strip HTML
+                                $stripHTML = str_replace("\n", " ", strip_tags($block->Content));
+                                $stripComponents = preg_replace('/[\[].*[\]]/U' , '', $stripHTML);
+                                $blockItem['Content'] = $stripComponents;
+                                array_push($blockArray, $blockItem);
+                            }
                         }
                     }
                 }
