@@ -3,7 +3,7 @@
 ## Installation
 
 ```
-composer require chewyou/algolia-search
+composer require chewyou/silverstripe-algolia-search
 ```
 
 Requires SilverStripe 4. To also install the front end dependencies use `npm`.

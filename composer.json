@@ -1,5 +1,5 @@
 {
-    "name": "chewyou/algolia-search",
+    "name": "chewyou/silverstripe-algolia-search",
     "description": "Algolia Indexer and Search Functionality for SilverStripe",
     "type": "silverstripe-vendormodule",
     "licence": "BSD-3-Clause",
