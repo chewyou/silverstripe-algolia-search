@@ -1,7 +1,5 @@
 # Algolia Search and Indexer 
 
-[![Build Status](https://secure.travis-ci.org/chewyou/algolia-search.svg)](https://travis-ci.org/chewyou/algolia-search)
-
 ## Installation
 
 ```
