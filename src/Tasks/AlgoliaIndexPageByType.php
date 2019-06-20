@@ -1,6 +1,10 @@
 <?php
 
-require_once(__DIR__ . '/../vendor/algoliasearch-client-php-master/algoliasearch.php');
+namespace Chewyou\Algolia\Tasks;
+
+use SilverStripe\Dev\BuildTask;
+use SilverStripe\Dev\Debug;
+use SilverStripe\SiteConfig\SiteConfig;
 
 class AlgoliaIndexPageByType extends BuildTask
 {
@@ -11,7 +15,9 @@ class AlgoliaIndexPageByType extends BuildTask
     protected $enabled = true;
 
     private $apiKey;
+
     private $applicationID;
+
     private $indexName;
 
     public function run($request)
@@ -31,7 +37,7 @@ class AlgoliaIndexPageByType extends BuildTask
             $this->indexTypeOf($pagetype, $values);
 
         } else {
-            Debug::dump("In URL add: 
+            Debug::dump("In URL add:
             \n?pagetype={pagetype}&values={Title,Subtitle,Content}
             \nID is added automatically.
             \nValues are comma separated, no spaces.
@@ -63,6 +69,6 @@ class AlgoliaIndexPageByType extends BuildTask
         }
 
         Debug::dump("Number of pages indexed: " . $count);
-        Debug::dump("See index at <a href='https://www.algolia.com/apps/$this->applicationID/explorer/browse/$this->indexName' target='_blank'>https://www.algolia.com/apps/".$this->applicationID."/explorer/browse/".$this->indexName."</a>");
+        Debug::dump("See index at https://www.algolia.com/apps/".$this->applicationID."/explorer/browse/".$this->indexName);
     }
 }

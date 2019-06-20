@@ -1,0 +1,8 @@
+.idea
+.DS_Store
+node_modules
+.php_cs
+.php_cs.cache
+vendor/
+resources/
+composer.lock

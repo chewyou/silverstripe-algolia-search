@@ -1,15 +1,12 @@
 ---
 Name: algolia-search
-After: 'framework/*','cms/*'
 ---
-SiteConfig:
+Silverstripe\SiteConfig\SiteConfig:
   extensions:
-   - AlgoliaSearchSiteConfigExtension
-
-Page_Controller:
+   - Chewyou\Algolia\Extensions\AlgoliaSearchSiteConfigExtension
+PageController:
   extensions:
-    - AlgoliaController
-
+    - Chewyou\Algolia\Controller\AlgoliaController
 Page:
   extensions:
-    - PageExtension
+    - Chewyou\Algolia\Extensions\PageExtension

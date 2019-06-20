@@ -1,11 +1,29 @@
 {
   "name": "chewyou/algolia-search",
-  "description": "Algolia Indexer and Search Functionality",
-  "type": "silverstripe-module",
-  "authors": [
-    {
+  "description": "Algolia Indexer and Search Functionality for SilverStripe",
+  "type": "silverstripe-vendormodule",
+  "licence": "BSD-3-Clause",
+  "authors": [{
       "name": "Ben Pickett",
       "email": "ben.pickett@education.govt.nz"
     }
-  ]
+  ],
+  "keywords": [
+    "silverstripe",
+    "search",
+    "algolia"
+  ],
+  "require-dev": {
+    "phpunit/PHPUnit": "^5.7"
+  },
+  "require": {
+    "silverstripe/cms": ">=4.0.0",
+    "algolia/algoliasearch-client-php": "^2.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "lint": "phpcs src/ tests/",
+    "lint-clean": "phpcbf src/ tests/"
+  }
 }
