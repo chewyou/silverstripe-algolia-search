@@ -1,7 +1,7 @@
 function getConfig() {
-    return {
-        apiKey: '$apiKeyValue',
-        applicationID: '$applicationIDValue',
-        indexName: '$indexNameValue'
-    };
+  return {
+    apiKey: "$apiKeyValue",
+    applicationID: "$applicationIDValue",
+    indexName: "$indexNameValue"
+  };
 }
