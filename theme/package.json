@@ -1,5 +1,5 @@
 {
-  "name": "alogila-search",
+  "name": "silverstripe-algolia-search",
   "version": "1.0.1",
   "private": true,
   "scripts": {
