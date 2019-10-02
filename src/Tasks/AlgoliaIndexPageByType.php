@@ -6,8 +6,7 @@ use SilverStripe\Dev\BuildTask;
 use SilverStripe\Dev\Debug;
 use SilverStripe\SiteConfig\SiteConfig;
 
-class AlgoliaIndexPageByType extends BuildTask
-{
+class AlgoliaIndexPageByType extends BuildTask {
     protected $title = 'Algolia: Index Page by Type';
 
     protected $description = 'Algolia: Index pages by ONE page type (ClassName)';
@@ -20,8 +19,7 @@ class AlgoliaIndexPageByType extends BuildTask
 
     private $indexName;
 
-    public function run($request)
-    {
+    public function run($request) {
         $siteConfig = SiteConfig::current_site_config();
 
         if (isset($_GET['pagetype']) && isset($_GET['values'])) {
@@ -45,8 +43,7 @@ class AlgoliaIndexPageByType extends BuildTask
         }
     }
 
-    public function indexTypeOf($pagetype, $values)
-    {
+    public function indexTypeOf($pagetype, $values) {
         $client = new \AlgoliaSearch\Client($this->applicationID, $this->apiKey);
         $searchIndex = $client->initIndex($this->indexName);
 
@@ -61,14 +58,17 @@ class AlgoliaIndexPageByType extends BuildTask
                 // Strip html
                 $refinedValue = str_replace("\n", " ", strip_tags($item->$value));
 
-                $toIndex['object'.$value] = $refinedValue;
+                $toIndex['object' . $value] = $refinedValue;
             }
 
             $searchIndex->addObject($toIndex);
-            $count ++;
+            $count++;
         }
 
         Debug::dump("Number of pages indexed: " . $count);
-        Debug::dump("See index at https://www.algolia.com/apps/".$this->applicationID."/explorer/browse/".$this->indexName);
+        Debug::dump("See index at https://www.algolia.com/apps/" .
+            $this->applicationID .
+            "/explorer/browse/" .
+            $this->indexName);
     }
 }

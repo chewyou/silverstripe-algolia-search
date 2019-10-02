@@ -15,8 +15,7 @@ use SilverStripe\Forms\CheckboxSetField;
 use Chewyou\Algolia\Model\TagName;
 use SilverStripe\Dev\Debug;
 
-class PageExtension extends DataExtension
-{
+class PageExtension extends DataExtension {
     /**
      * @var boolean
      *
@@ -33,13 +32,11 @@ class PageExtension extends DataExtension
         'TagNames' => TagName::class
     ];
 
-    public function enable_indexer()
-    {
+    public function enable_indexer() {
         return $this->owner->stat('enable_indexer') ? true : false;
     }
 
-    public function updateCMSFields(FieldList $fields)
-    {
+    public function updateCMSFields(FieldList $fields) {
         if ($this->owner->enable_indexer()) {
             $fields->addFieldsToTab('Root.SearchSettings', [
                 TabSet::create('SearchSettings',
@@ -58,8 +55,7 @@ class PageExtension extends DataExtension
         }
     }
 
-    public function onAfterWrite()
-    {
+    public function onAfterWrite() {
         if ($this->owner->enable_indexer()) {
             if ($this->owner->Searchable == 1) {
                 $siteConfig = SiteConfig::current_site_config();
@@ -78,7 +74,7 @@ class PageExtension extends DataExtension
                                 $blockItem['Title'] = $block->Title;
                                 // Strip HTML
                                 $stripHTML = str_replace("\n", " ", strip_tags($block->Content));
-                                $stripComponents = preg_replace('/[\[].*[\]]/U' , '', $stripHTML);
+                                $stripComponents = preg_replace('/[\[].*[\]]/U', '', $stripHTML);
                                 $blockItem['Content'] = $stripComponents;
                                 array_push($blockArray, $blockItem);
                             }
@@ -98,8 +94,7 @@ class PageExtension extends DataExtension
         parent::onAfterWrite();
     }
 
-    public function onBeforeDelete()
-    {
+    public function onBeforeDelete() {
         if ($this->owner->enable_indexer()) {
             $indexer = new AlgoliaIndexer($this->owner, null, null);
             $indexer->deleteData();

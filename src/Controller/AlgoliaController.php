@@ -8,25 +8,23 @@ use SilverStripe\View\ThemeResourceLoader;
 use SilverStripe\View\Requirements;
 use SilverStripe\Dev\Debug;
 
-class AlgoliaController extends DataExtension
-{
-    public function onAfterInit()
-    {
+class AlgoliaController extends DataExtension {
+    public function onAfterInit() {
         $siteConfig = SiteConfig::current_site_config();
 
         $theme = ThemeResourceLoader::inst()->getPath('');
 
         if ($siteConfig->searchAPIKey && $siteConfig->applicationID && $siteConfig->indexName) {
             $js_config = [
-                'apiKeyValue'        => $siteConfig->searchAPIKey,
+                'apiKeyValue' => $siteConfig->searchAPIKey,
                 'applicationIDValue' => $siteConfig->applicationID,
-                'indexNameValue'     => $siteConfig->indexName
+                'indexNameValue' => $siteConfig->indexName
             ];
         } else {
             $js_config = [
-                'apiKeyValue'        => null,
+                'apiKeyValue' => null,
                 'applicationIDValue' => null,
-                'indexNameValue'     => null
+                'indexNameValue' => null
             ];
         }
 
