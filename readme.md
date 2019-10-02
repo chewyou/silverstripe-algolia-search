@@ -3,8 +3,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/325225367e764d6ca68991bc98cac083)](https://www.codacy.com/manual/benspickett/silverstripe-algolia-search?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=chewyou/silverstripe-algolia-search&amp;utm_campaign=Badge_Grade)
 
 ## Requirements
--  Silverstripe 4+
--  NPM
+-   Silverstripe 4+
+-   NPM
 
 ## Installation
 
