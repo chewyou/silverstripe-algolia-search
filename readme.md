@@ -2,15 +2,31 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/325225367e764d6ca68991bc98cac083)](https://www.codacy.com/manual/benspickett/silverstripe-algolia-search?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=chewyou/silverstripe-algolia-search&amp;utm_campaign=Badge_Grade)
 
+## Requirements
+-  Silverstripe 4+
+-  NPM
+
 ## Installation
 
-```
+```text
 composer require chewyou/silverstripe-algolia-search
 ```
 
-Requires SilverStripe 4. To also install the front end dependencies use `npm`.
+You may need to add the repository to the composer.json file, as below:
 
+```json
+"repositories": 
+    [
+        {
+            "type": "vcs",
+            "url": "https://github.com/chewyou/silverstripe-algolia-search.git"
+        }
+    ],
 ```
+
+To include the Algolia Search JS files:
+
+```text
 npm install algoliasearch jquery --save
 ```
 
@@ -24,7 +40,7 @@ Add the following to all the page types you need indexed. Put on a base page to 
 
 ## CMS Setup
 
-Under Settings > Algolia Search Configuration, enter your Algolia account details
+Under Settings > Algolia Search Configuration, enter your Algolia account details.
 
 -   Admin API Key
 -   Search API Key
@@ -43,9 +59,11 @@ _search-action.js_ however should be adjusted based on the values indexed and re
 
 ##### To include the search and results template on a template page
 
-    <% include AlgoliaSearchResults %>
+```silverstripe
+<% include AlgoliaSearchResults %>
+```
 
-This is a guide to go with the JS and should also be overridden with your own
+This is an example/guide to go with the JS and should also be overridden with your own
 implementation
 
 ## Indexing existing pages (two options)
