@@ -6,8 +6,7 @@ use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Dev\Debug;
 use Algolia\AlgoliaSearch\SearchClient;
 
-class AlgoliaIndexer
-{
+class AlgoliaIndexer {
     /**
      * @var DataObject
      */
@@ -43,8 +42,7 @@ class AlgoliaIndexer
      * @param string[] $valuesToIndex
      * @param string[] $blocksArray
      */
-    public function __construct($item = null, $valuesToIndex = [], $blockArray = [])
-    {
+    public function __construct($item = null, $valuesToIndex = [], $blockArray = []) {
         $siteConfig = SiteConfig::current_site_config();
 
         $this->item = $item;
@@ -58,24 +56,21 @@ class AlgoliaIndexer
     /**
      * @return boolean
      */
-    public function isEnabled()
-    {
+    public function isEnabled() {
         return ($this->applicationID && $this->apiKey);
     }
 
     /**
      * @return SearchClient
      */
-    public function getClient()
-    {
+    public function getClient() {
         return SearchClient::create($this->applicationID, $this->apiKey);
     }
 
     /**
      * @return boolean
      */
-    public function indexData()
-    {
+    public function indexData() {
         if (!$this->isEnabled()) {
             return false;
         }
@@ -89,7 +84,7 @@ class AlgoliaIndexer
 
         // Index Unique Identifier
         $toIndex = [
-            'objectID' => md5($item->ID. "_" . $item->ClassName)
+            'objectID' => md5($item->ID . "_" . $item->ClassName)
         ];
 
         // Index values entered in CMS
@@ -97,7 +92,7 @@ class AlgoliaIndexer
             foreach ($valuesToIndex as $value) {
                 // Strip html
                 $refinedValue = str_replace("\n", " ", strip_tags($item->$value));
-                $toIndex['object'.$value] = $refinedValue;
+                $toIndex['object' . $value] = $refinedValue;
             }
         }
 
@@ -124,8 +119,7 @@ class AlgoliaIndexer
     /**
      * @return boolean
      */
-    public function deleteData()
-    {
+    public function deleteData() {
         if (!$this->isEnabled()) {
             return false;
         }
@@ -135,7 +129,7 @@ class AlgoliaIndexer
         $client = new \AlgoliaSearch\Client($this->applicationID, $this->apiKey);
         $searchIndex = $client->initIndex($this->indexName);
 
-        $searchIndex->deleteObject(md5($item->ID. "_" . $item->ClassName));
+        $searchIndex->deleteObject(md5($item->ID . "_" . $item->ClassName));
 
         return true;
     }

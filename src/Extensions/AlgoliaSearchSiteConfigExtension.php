@@ -14,8 +14,7 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use Chewyou\Algolia\Model\TagName;
 
-class AlgoliaSearchSiteConfigExtension extends DataExtension
-{
+class AlgoliaSearchSiteConfigExtension extends DataExtension {
     private static $db = [
         'adminAPIKey' => 'Varchar(150)',
         'searchAPIKey' => 'Varchar(150)',
@@ -30,8 +29,7 @@ class AlgoliaSearchSiteConfigExtension extends DataExtension
         'TagNames' => TagName::class
     ];
 
-    public function updateCMSFields(FieldList $fields)
-    {
+    public function updateCMSFields(FieldList $fields) {
         $config = GridFieldConfig_RelationEditor::create();
 
         $fields->addFieldsToTab('Root.AlgoliaSearchConfiguration', [
@@ -43,7 +41,8 @@ class AlgoliaSearchSiteConfigExtension extends DataExtension
                     TextField::create('indexName', 'Index Name')
                 ),
                 Tab::create('Index Values',
-                    TextAreaField::create('indexValues', 'Index Values')->setDescription('Comma separated database values please')
+                    TextAreaField::create('indexValues', 'Index Values')
+                        ->setDescription('Comma separated database values please')
                 ),
                 Tab::create('Tags',
                     $gridField = GridField::create('TagNames', 'TagNames', $this->owner->TagNames())

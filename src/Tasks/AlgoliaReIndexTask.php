@@ -8,12 +8,10 @@ use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Control\HTTPRequest;
 use Chewyou\Algolia\Services\AlgoliaIndexService;
 
-class AlgoliaReIndexTask extends BuildTask
-{
+class AlgoliaReIndexTask extends BuildTask {
     private static $segment = 'AlgoliaReIndexTask';
 
-    public function run($request)
-    {
+    public function run($request) {
         $service = new AlgoliaIndexService();
 
         return $service->run();

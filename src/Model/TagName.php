@@ -6,8 +6,7 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\SiteConfig\SiteConfig;
 use Page;
 
-class TagName extends DataObject
-{
+class TagName extends DataObject {
     private static $singular_name = 'Tag Name';
 
     private static $plural_name = 'Tag Names';
@@ -17,7 +16,7 @@ class TagName extends DataObject
     ];
 
     private static $has_one = [
-        'SiteConfig'   => SiteConfig::class
+        'SiteConfig' => SiteConfig::class
     ];
 
     private static $belongs_many_many = [
@@ -26,8 +25,7 @@ class TagName extends DataObject
 
     private static $table_name = 'AlgoliaTagName';
 
-    public function getCMSFields()
-    {
+    public function getCMSFields() {
         $fields = parent::getCMSFields();
         $fields->removeByName('SiteConfigID');
         $fields->removeByName('LinkTracking');

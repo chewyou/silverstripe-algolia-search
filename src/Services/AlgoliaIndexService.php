@@ -11,10 +11,8 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\Dev\Debug;
 use SilverStripe\Core\Config\Config;
 
-class AlgoliaIndexService
-{
-    public function run()
-    {
+class AlgoliaIndexService {
+    public function run() {
         $siteConfig = SiteConfig::current_site_config();
 
         // Should be adjusted based on what needs to be indexed in the siteconfig
@@ -34,7 +32,7 @@ class AlgoliaIndexService
                         $blockItem['Title'] = $block->Title;
                         // Strip HTML
                         $stripHTML = str_replace("\n", " ", strip_tags($block->Content));
-                        $stripComponents = preg_replace('/[\[].*[\]]/U' , '', $stripHTML);
+                        $stripComponents = preg_replace('/[\[].*[\]]/U', '', $stripHTML);
                         $blockItem['Content'] = $stripComponents;
                         array_push($blockArray, $blockItem);
                     }
