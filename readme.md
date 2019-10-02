@@ -57,7 +57,7 @@ _search-config.js_ (especially) and _search-algolia.js_ files shouldn't be touch
 
 _search-action.js_ however should be adjusted based on the values indexed and result layout
 
-##### To include the search and results template on a template page
+### To include the search and results template on a template page
 
 ```silverstripe
 <% include AlgoliaSearchResults %>
@@ -68,20 +68,19 @@ implementation
 
 ## Indexing existing pages (two options)
 
-##### Option 1:
+### Option 1
 
 Run the dev task _Algolia: Index Page by Type_ where:
 
 -   PageType is the classname of the page
--   Values are comma separated, no spaces, case sensitive and are \$db values
-    (ie. &values=Title,Content,LastEdited)
+-   Values are comma separated, no spaces, case sensitive and are \$db values (ie. &values=Title,Content,LastEdited)
 
-##### Option 2:
+### Option 2
 
 Or go through and save/publish all of the pages to index
 /dev/tasks/AlgoliaIndexPageByType&pagetype={PageType}&values={Title,Content,LastEdited}
 
-### To Do
+## To Do
 
 _Using the option to use Elemental Blocks; show or hide PageExtension Index
 Blocks option, and index a page when a block is published/updated (BlockExtension)_

@@ -6,7 +6,8 @@ use SilverStripe\Dev\BuildTask;
 use SilverStripe\Dev\Debug;
 use SilverStripe\SiteConfig\SiteConfig;
 
-class AlgoliaIndexPageByType extends BuildTask {
+class AlgoliaIndexPageByType extends BuildTask
+{
     protected $title = 'Algolia: Index Page by Type';
 
     protected $description = 'Algolia: Index pages by ONE page type (ClassName)';
@@ -19,7 +20,7 @@ class AlgoliaIndexPageByType extends BuildTask {
 
     private $indexName;
 
-    public function run($request) {
+    public function run() {
         $siteConfig = SiteConfig::current_site_config();
 
         if (isset($_GET['pagetype']) && isset($_GET['values'])) {

@@ -14,7 +14,8 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use Chewyou\Algolia\Model\TagName;
 
-class AlgoliaSearchSiteConfigExtension extends DataExtension {
+class AlgoliaSearchSiteConfigExtension extends DataExtension
+{
     private static $db = [
         'adminAPIKey' => 'Varchar(150)',
         'searchAPIKey' => 'Varchar(150)',
@@ -29,25 +30,30 @@ class AlgoliaSearchSiteConfigExtension extends DataExtension {
         'TagNames' => TagName::class
     ];
 
-    public function updateCMSFields(FieldList $fields) {
+    public function updateCMSFields(FieldList $fields)
+    {
         $config = GridFieldConfig_RelationEditor::create();
 
         $fields->addFieldsToTab('Root.AlgoliaSearchConfiguration', [
-            TabSet::create('Algolia Search Configuration',
-                Tab::create('API Details',
+            TabSet::create(
+                'Algolia Search Configuration',
+                Tab::create(
+                    'API Details',
                     TextField::create('adminAPIKey', 'Admin API Key'),
                     TextField::create('searchAPIKey', 'Search API Key'),
                     TextField::create('applicationID', 'Application ID'),
                     TextField::create('indexName', 'Index Name')
                 ),
-                Tab::create('Index Values',
+                Tab::create(
+                    'Index Values',
                     TextAreaField::create('indexValues', 'Index Values')
                         ->setDescription('Comma separated database values please')
                 ),
                 Tab::create('Tags',
                     $gridField = GridField::create('TagNames', 'TagNames', $this->owner->TagNames())
                 ),
-                Tab::create('Configuration',
+                Tab::create(
+                    'Configuration',
                     TextField::create('searchConfigLocation', 'Search Config JS File Location')
                         ->setDescription('eg: /src/js/components/algolia-search/search-config.js'),
                     OptionsetField::create('usingBlocks', 'Is this project using Elemental Blocks?')
