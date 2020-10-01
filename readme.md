@@ -82,5 +82,4 @@ Or go through and save/publish all of the pages to index
 
 ## To Do
 
-_Using the option to use Elemental Blocks; show or hide PageExtension Index
-Blocks option, and index a page when a block is published/updated (BlockExtension)_
+_Update this project to only use ElementalBlocks_
